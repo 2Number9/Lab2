@@ -26,10 +26,13 @@ std::vector<short int> WawParser::Parse() {
 
 	std::cout << "Information in Header: "; std::cout << static_cast<short int> (Header->AudioFormat) << " " << Header->BitsPerSample << " " << Header->SubChunk2Size << std::endl;
 	
+	char* Samples = (char*) malloc (Header->SubChunk2Size);
+	std::cout << "sizeof == " << sizeof(*Samples) << " " << sizeof(Samples) << std::endl;
+	std::vector<short int> Data;
+	Data.resize(Header->SubChunk2Size / 2);
+	File.read((char*) &Data, Header->SubChunk2Size);
+	std::cout << "Data[0] == " << *Data.begin() << std::endl;
+	std::cout << "Data[1] == " << (int) Data[1] << std::endl;
 
-
-	std::vector<short int> a;
-
-	a.push_back(1);
-	return a;
+	return Data;
 }
