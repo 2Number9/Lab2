@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 
+#define SAMPLES_IN_SECOND 10 //условие задачи
+
 typedef struct {
 	char ChunkId[4];  //Содержит символы RIFF-цепочки в ASCII-кодировке, является началом RIFF-цепочки
 	int ChunkIdSize;   //Размер оставшейся RIFF-цепочки, начиная с этой позиции (размер файла - 8)
