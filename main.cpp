@@ -3,6 +3,8 @@
 #include <vector>
 #include "WawParser.h"
 #include "Converters.h"
+#include "WawWrite.h"
+
 
 int main(int argc, char** argv) {
 	std::cout << static_cast<std::string> (argv[1]) << std::endl;
@@ -14,7 +16,7 @@ int main(int argc, char** argv) {
 	//parsed_config = config.Parse();
 
 	
-	ConfigParser config_parser(argv[2]);
+	ConfigParser config_parser(argv[3]);
 	std::vector<Config_arguments> config_parsed;
 	config_parsed = config_parser.Parse();
 	std::cout << " Jopix " << std::endl;
@@ -45,11 +47,22 @@ int main(int argc, char** argv) {
 			Converters::MuteConverter Muted(std::get<1>(config_parsed[i]));
 			Muted.convert(&waw_parsed);
 		}
+		else if (std::get<0>(config_parsed[i]) == "mix") {
+			std::cout << "MIXUEM YOPTA" << std::endl;
+			std::cout << "parsed(dst): " << std::endl;
+			for (int i = 0; i < 1500; i++) {
+				std::cout << "waw_parsed[" << i << "] == " << waw_parsed[i] << std::endl;
+			}
+			Converters::MixConverter Mixed(std::get<1>(config_parsed[i]));
+			std::cout << "Opa" << std::endl;
+			Mixed.convert(&waw_parsed);
+		}
 	}
-
-	for (int i = 0; i < 5000; i++) {
+	std::cout << "parsed(mixed):" << std::endl;
+	for (int i = 0; i < 1500; i++) {
 		std::cout << "waw_parsed[" << i << "] == " << waw_parsed[i] << std::endl;
 	}
+	std::cout << "waw_parser.Header->SampleRate == " << waw_parser.Header->SampleRate << std::endl;
 	
 	//for (int i = 0; i < 10000; i++) {
 		//std::cout << "waw_parsed[" << i << "] == " << waw_parsed[i] << std::endl;
@@ -57,5 +70,9 @@ int main(int argc, char** argv) {
 	//for (int i = 0; i < 10000; i++) {
 		//std::cout << "waw_parsed[" << i << "] == " << waw_parsed[i] << std::endl;
 	//}
+
+	WawWrite Writer(static_cast<std::string> ("output.wav"), *waw_parser.Header);
+	Writer.Write(waw_parsed);
+
 	return 0;
 }

@@ -12,7 +12,7 @@ set(exe_name ${PROJECT_NAME})
 
 # описываем основную библиотеку, т.е. библиотеку, содержащую все cpp-файлы, кроме main.cpp
 # TODO: отредактировать список cpp-файлов
-add_library(corelib OBJECT WawParser.cpp ConfigParser.cpp Converters.cpp)
+add_library(corelib OBJECT WawParser.cpp ConfigParser.cpp Converters.cpp WawWrite.cpp)
 
 
 # описываем исполняемый файл основной программы: это main.cpp + основная библиотека

@@ -17,15 +17,23 @@ void Converters::MuteConverter::convert(SamplesProduct* input) { //input->size()
 }
 
 Converters::MixConverter::MixConverter(std::vector<std::string> args) {
-	FileName = args[1];
-	time = stoi(args[2]);
+	if (args[0] == "$2") {
+		std::cout << "fnk" << std::endl;
+		FileName = "../Masha.wav";
+	}
+	time = stoi(args[1]);
 }
 
 void Converters::MixConverter::convert(SamplesProduct* input) {
 	WawParser parser(FileName);
 	SamplesProduct parsed;
 	parsed = parser.Parse();
+	std::cout << "parsed(fnk): " << std::endl;
+	for (int i = 0; i < 1500; i++)
+		std::cout << "parsed(fnk)[" << i << "] == " << parsed[i] << std::endl;
+	std::cout << "parsed.size() == " << parsed.size() << std::endl;
 	for (int i = time * SAMPLES_IN_SECOND; i < std::min(parsed.size(), input->size()); i++) {
 		(*input)[i] = ((*input)[i] + parsed[i]) / 2;
+		//(*input)[i] = 6666;
 	}
 }

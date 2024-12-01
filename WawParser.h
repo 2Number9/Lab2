@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-#define SAMPLES_IN_SECOND 10 //условие задачи
+#define SAMPLES_IN_SECOND 44100 //условие задачи
 
 typedef struct {
 	char ChunkId[4];  //—одержит символы RIFF-цепочки в ASCII-кодировке, €вл€етс€ началом RIFF-цепочки
