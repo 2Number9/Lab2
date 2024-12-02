@@ -15,8 +15,8 @@ int main(int argc, char** argv) {
 
 	//parsed_config = config.Parse();
 
-	
-	ConfigParser config_parser(argv[3]);
+	std::cout << "argc == " << argc << std::endl;
+	ConfigParser config_parser(argv[argc-2]); //предпоследний элемент
 	std::vector<Config_arguments> config_parsed;
 	config_parsed = config_parser.Parse();
 	std::cout << " Jopix " << std::endl;
@@ -53,6 +53,14 @@ int main(int argc, char** argv) {
 			for (int i = 0; i < 1500; i++) {
 				std::cout << "waw_parsed[" << i << "] == " << waw_parsed[i] << std::endl;
 			}
+			std::string other_input = (std::get<1>(config_parsed[i]))[0];
+			std::cout << "other_input == " << other_input << std::endl;
+			other_input.erase(0, 1);
+			std::cout << "other_input == " << other_input << std::endl;
+			other_input = argv[(stoi(other_input))];
+			std::cout << "other_input == " << other_input << std::endl;
+			std::get<1>(config_parsed[i])[0] = other_input;
+			std::cout << "std::get<1>(config_parsed[i])[0] == " << (std::get<1>(config_parsed[i])[0]) << std::endl;
 			Converters::MixConverter Mixed(std::get<1>(config_parsed[i]));
 			std::cout << "Opa" << std::endl;
 			Mixed.convert(&waw_parsed);
@@ -71,7 +79,7 @@ int main(int argc, char** argv) {
 		//std::cout << "waw_parsed[" << i << "] == " << waw_parsed[i] << std::endl;
 	//}
 
-	WawWrite Writer(static_cast<std::string> ("output.wav"), *waw_parser.Header);
+	WawWrite Writer(static_cast<std::string> (argv[argc-1]), *waw_parser.Header);
 	Writer.Write(waw_parsed);
 
 	return 0;

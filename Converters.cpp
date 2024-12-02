@@ -17,10 +17,7 @@ void Converters::MuteConverter::convert(SamplesProduct* input) { //input->size()
 }
 
 Converters::MixConverter::MixConverter(std::vector<std::string> args) {
-	if (args[0] == "$2") {
-		std::cout << "fnk" << std::endl;
-		FileName = "../Masha.wav";
-	}
+	FileName = (args[0]);
 	time = stoi(args[1]);
 }
 
