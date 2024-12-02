@@ -4,11 +4,12 @@
 #include "WawParser.h"
 #include "Converters.h"
 #include "WawWrite.h"
+#include "SoundProcessor.h"
 
 
 int main(int argc, char** argv) {
 	std::cout << static_cast<std::string> (argv[1]) << std::endl;
-	//ConfigParser config(static_cast<std::string> (argv[1]));
+	/*//ConfigParser config(static_cast<std::string> (argv[1]));
 
 	//typedef std::tuple<std::string, std::vector<std::string>> data;
 	//std::vector<data> parsed_config;
@@ -31,7 +32,7 @@ int main(int argc, char** argv) {
 		Converters::MuteConverter muted_samples(std::get<1>(config_parsed[0]));
 		muted_samples.convert(&waw_parsed);
 	}
-	//}*/
+	//}
 	std::cout << "waw_parsed.size() == " << waw_parsed.size() << std::endl;
 	int cnt = 0;
 	for (int i = 0; i < waw_parsed.size(); i++) {
@@ -89,7 +90,9 @@ int main(int argc, char** argv) {
 	//}
 
 	WawWrite Writer(static_cast<std::string> (argv[argc-1]), *waw_parser.Header);
-	Writer.Write(waw_parsed);
-
+	Writer.Write(waw_parsed);*/
+	std::cout << "argc == " << argc << std::endl;
+	SoundProcessor sound_processor(argc, argv);
+	sound_processor.run();
 	return 0;
 }

@@ -11,6 +11,7 @@ Converters::MuteConverter::MuteConverter(std::vector<std::string> args) {
 }
 
 void Converters::MuteConverter::convert(SamplesProduct* input) { //input->size() - это количество элементов в векторе (сэмплов)
+	std::cout << "OPAYO" << std::endl;
 	for (int i = start * SAMPLES_IN_SECOND; i < std::min(end * SAMPLES_IN_SECOND, static_cast<int> (input->size())); i++) {
 		(*input)[i] = 0;
 	}
@@ -19,6 +20,8 @@ void Converters::MuteConverter::convert(SamplesProduct* input) { //input->size()
 Converters::MixConverter::MixConverter(std::vector<std::string> args) {
 	FileName = (args[0]);
 	time = stoi(args[1]);
+	std::cout << "FileName == " << FileName << std::endl;
+	std::cout << "time == " << time << std::endl;
 }
 
 void Converters::MixConverter::convert(SamplesProduct* input) {
@@ -43,6 +46,7 @@ Converters::AntiMixConverter::AntiMixConverter(std::vector<std::string> args) {
 
 void Converters::AntiMixConverter::convert(SamplesProduct* input) {
 	WawParser waw_parser(FileName);
+	std::cout << "FileName(anti_mix == " << FileName << std::endl;
 	SamplesProduct waw_parsed = waw_parser.Parse();
 	for (int i = start * SAMPLES_IN_SECOND; i < std::min(end * SAMPLES_IN_SECOND, static_cast<int> (input->size())); i++) {
 		(*input)[i] = ((*input)[i] - (waw_parsed[i] / 2)) * 2;
