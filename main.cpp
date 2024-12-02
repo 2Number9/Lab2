@@ -65,6 +65,15 @@ int main(int argc, char** argv) {
 			std::cout << "Opa" << std::endl;
 			Mixed.convert(&waw_parsed);
 		}
+		else if (std::get<0>(config_parsed[i]) == "anti_mix") {
+			std::string other_input;
+			other_input = std::get<1>(config_parsed[i])[0];
+			other_input.erase(0, 1);
+			other_input = argv[(stoi(other_input))];
+			std::get<1>(config_parsed[i])[0] = other_input;
+			Converters::AntiMixConverter anti_mix(std::get<1>(config_parsed[i]));
+			anti_mix.convert(&waw_parsed);
+		}
 	}
 	std::cout << "parsed(mixed):" << std::endl;
 	for (int i = 0; i < 1500; i++) {

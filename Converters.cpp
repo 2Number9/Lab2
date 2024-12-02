@@ -34,3 +34,17 @@ void Converters::MixConverter::convert(SamplesProduct* input) {
 		//(*input)[i] = 6666;
 	}
 }
+
+Converters::AntiMixConverter::AntiMixConverter(std::vector<std::string> args) {
+	FileName = args[0];
+	start = (stoi(args[1]));
+	end = (stoi(args[2]));
+}
+
+void Converters::AntiMixConverter::convert(SamplesProduct* input) {
+	WawParser waw_parser(FileName);
+	SamplesProduct waw_parsed = waw_parser.Parse();
+	for (int i = start * SAMPLES_IN_SECOND; i < std::min(end * SAMPLES_IN_SECOND, static_cast<int> (input->size())); i++) {
+		(*input)[i] = ((*input)[i] - (waw_parsed[i] / 2)) * 2;
+	}
+}

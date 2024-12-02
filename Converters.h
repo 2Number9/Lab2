@@ -30,4 +30,14 @@ namespace Converters { //имена используются только в пределах пространства имён,
 		int time;				//и с какого момента должно происходить смешивание
 
 	};
+
+	class AntiMixConverter : public BaseConverter {
+	public:
+		explicit AntiMixConverter(std::vector<std::string> args);
+		void convert(SamplesProduct* input);
+	private:
+		std::string FileName;
+		int start;
+		int end;
+	};
 }
