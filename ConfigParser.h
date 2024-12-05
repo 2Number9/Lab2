@@ -10,7 +10,7 @@ typedef std::tuple<std::string, std::vector<std::string>> Config_arguments; //tu
 																			//данных, когда vector для одного
 class ConfigParser {
 public:
-	ConfigParser(std::string argument);
+	ConfigParser(std::string name);
 	std::vector<Config_arguments> Parse();
 private:
 	std::string FileName;

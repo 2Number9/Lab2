@@ -7,6 +7,6 @@ void WawWrite::Write(std::vector<short int> Samples) {
 	std::ofstream File(FileName, std::ios::binary);
 	Header.SubChunk2Size = Samples.size() * 2;
 	Header.SubChunk2Id[0] = 'd'; Header.SubChunk2Id[1] = 'a'; Header.SubChunk2Id[2] = 't'; Header.SubChunk2Id[3] = 'a';
-	File.write((char*) (&Header), sizeof(Header));
-	File.write((char*) Samples.data(), Samples.size());
+	File.write(reinterpret_cast<char*> (&Header), sizeof(Header));
+	File.write(reinterpret_cast<char*> (Samples.data()), Samples.size());
 }

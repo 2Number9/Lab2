@@ -8,6 +8,6 @@ std::unique_ptr<Converters::BaseConverter> Factory::CreateConverter(std::string 
 	auto cvt = converter_map.find(name);
 	if (cvt == converter_map.end()) {
 		return nullptr;
-	} //find возвращает итератр
-	return cvt->second(std::move(args)); //второй элемент map
+	}
+	return cvt->second(std::move(args));
 }

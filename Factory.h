@@ -12,13 +12,13 @@ std::unique_ptr<Converters::BaseConverter> create(std::vector<std::string> args)
 
 class Factory {
 public:
-	Factory() = default; //мы указываем коспилятору самостоятельно генерировать конструктор по умолчанию для класса Factory
-	template<typename T>			//вызов static метода не связан с конкретным объектом класса, он вызывается для класса
-	static bool RegisterConverter(std::string name); //static функция, не зависит от определенного объекта, работает с переменной static поле
-	static std::unique_ptr<Converters::BaseConverter> CreateConverter(std::string name, std::vector<std::string> args); //static функция, по сути обычная функция, работает с полем static converter_map, которое общее для всего класса
+	Factory() = default; 
+	template<typename T>			
+	static bool RegisterConverter(std::string name); 
+	static std::unique_ptr<Converters::BaseConverter> CreateConverter(std::string name, std::vector<std::string> args);
 private:
-	static std_map converter_map; //static поле класса, хранит состояние всего класса, не зависит от конкретного
-};								  //объекта класса
+	static std_map converter_map; 
+};								  
 
 template<typename T>
 bool Factory::RegisterConverter(std::string name) {
