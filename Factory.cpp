@@ -4,7 +4,7 @@
 
 std_map Factory::converter_map;
 
-std::unique_ptr<Converters::BaseConverter> Factory::CreateConverter(std::string name, std::vector<std::string> args) {
+std::unique_ptr<Converters::BaseConverter> Factory::CreateConverter(std::string name, std::vector<std::string>* args) {
 	auto cvt = converter_map.find(name);
 	if (cvt == converter_map.end()) {
 		return nullptr;

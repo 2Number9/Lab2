@@ -1,4 +1,3 @@
-
 class SoundProcessor {
 public:
 	SoundProcessor(int argc, char** argv);
