@@ -7,14 +7,14 @@ typedef std::vector<int16_t> SamplesProduct;
 namespace Converters {
 	class BaseConverter {
 	public:
-		virtual void convert(SamplesProduct* input1, std::vector<SamplesProduct*>* input2) = 0;
+		virtual SamplesProduct convert(const SamplesProduct &input1, const std::vector<SamplesProduct> &input2) = 0;
 	};
 
 	class MuteConverter : public BaseConverter {
 
 	public:
-		explicit MuteConverter(std::vector<std::string>* args);
-		void convert(SamplesProduct* input1, std::vector<SamplesProduct*>* input2) override;
+		explicit MuteConverter(const std::vector<std::string> &args);
+		SamplesProduct convert(const SamplesProduct &input1, const std::vector<SamplesProduct>& input2) override;
 
 	private:
 		int start, end;
@@ -23,8 +23,8 @@ namespace Converters {
 
 	class MixConverter : public BaseConverter {
 	public:
-		explicit MixConverter(std::vector<std::string>* args);
-		void convert(SamplesProduct* input1, std::vector<SamplesProduct*>* input2) override; //
+		explicit MixConverter(const std::vector<std::string> &args);
+		SamplesProduct convert(const SamplesProduct& input1, const std::vector<SamplesProduct>& input2) override; //
 	private:
 		int index;
 		int time;				//
@@ -32,8 +32,8 @@ namespace Converters {
 
 	class AntiMixConverter : public BaseConverter {
 	public:
-		explicit AntiMixConverter(std::vector<std::string>* args);
-		void convert(SamplesProduct* input1, std::vector<SamplesProduct*>* input2) override;
+		explicit AntiMixConverter(const std::vector<std::string> &args);
+		SamplesProduct convert(const SamplesProduct& input1, const std::vector<SamplesProduct>& input2) override;
 	private:
 		int index;
 		int start;

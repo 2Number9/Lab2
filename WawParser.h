@@ -23,7 +23,7 @@ typedef struct {
 class WawParser {
 public:
 	WawParser(std::string);
-	std::vector<int16_t>* Parse();
+	std::vector<int16_t> Parse();
 	Waw_header* Header;
 private:
 	std::string FileName;

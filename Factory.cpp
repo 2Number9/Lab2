@@ -2,12 +2,27 @@
 #include <iostream>
 #include <utility>
 
-std_map Factory::converter_map;
-
-std::unique_ptr<Converters::BaseConverter> Factory::CreateConverter(std::string name, std::vector<std::string>* args) {
-	auto cvt = converter_map.find(name);
-	if (cvt == converter_map.end()) {
-		return nullptr;
+std::unique_ptr<Converters::BaseConverter> Factory::CreateConverter(std::string name, const std::vector<std::string> &args) {
+	
+	if (name == "mix") {
+		auto cvt = std::make_unique<Converters::MixConverter>(std::move(args));
+		return cvt;
 	}
-	return cvt->second(std::move(args));
+	else //const ссылки
+		if (name == "mute") {
+			auto cvt = std::make_unique<Converters::MuteConverter>(std::move(args));
+			return cvt;
+		}
+		else {
+			if (name == "anti_mix") {
+				auto cvt = std::make_unique<Converters::AntiMixConverter>(std::move(args));
+				return cvt;
+			}
+			else {
+				auto cvt = nullptr;
+				return cvt;
+			}
+		}
+
 }
+

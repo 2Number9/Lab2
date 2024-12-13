@@ -1,0 +1,1 @@
+Аргументы командной строки имеют вид: input1.wav, input2.wav, ..., Config.txt, output.wav
